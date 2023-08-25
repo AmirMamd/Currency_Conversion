@@ -21,7 +21,7 @@ public class CurrencyController{
     private final CurrencyService currencyService;
 
     @GetMapping("/convert")
-    @Cacheable("conversion")
+    //@Cacheable("conversion")
     public Double convertCurrency(
             @RequestParam String fromCurrency,
             @RequestParam String toCurrency,
@@ -34,7 +34,7 @@ public class CurrencyController{
         }
     }
     @GetMapping("/compare")
-    @Cacheable("comparison")
+    //@Cacheable("comparison")
     public LatestDto compareWithBase(
             @RequestParam String base
     ) {
@@ -47,7 +47,7 @@ public class CurrencyController{
     }
 
     @GetMapping("/")
-    @Cacheable("images")
+    //@Cacheable("images")
     public List<ImageDto> retrieveImages(){
         try {
             return currencyService.getAllCurrencyImages();
@@ -56,7 +56,7 @@ public class CurrencyController{
         }
     }
     @GetMapping("/image")
-    @Cacheable("image")
+    //@Cacheable("image")
     public Object retrieveOneImage(@RequestParam String countryCode){
         try {
             return currencyService.getImage(countryCode);
@@ -65,9 +65,9 @@ public class CurrencyController{
         }
     }
 
-    @CacheEvict(allEntries = true, value = {"conversion", "comparison", "images", "image"})
-    @PostMapping("/clear-cache")
-    public String clearCache() {
-        return "Cache cleared.";
-    }
+//    @CacheEvict(allEntries = true, value = {"conversion", "comparison", "images", "image"})
+//    @PostMapping("/clear-cache")
+//    public String clearCache() {
+//        return "Cache cleared.";
+//    }
 }

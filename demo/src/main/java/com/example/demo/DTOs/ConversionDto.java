@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConversionDto implements Serializable {
+public class ConversionDto {
     @JsonProperty("base_code")
     private String baseCode;
 

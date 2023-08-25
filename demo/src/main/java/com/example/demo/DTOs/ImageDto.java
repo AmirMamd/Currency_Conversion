@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImageDto implements Serializable {
+public class ImageDto {
     @JsonProperty("currency_code")
     private String currency;
     @JsonProperty("image_url")

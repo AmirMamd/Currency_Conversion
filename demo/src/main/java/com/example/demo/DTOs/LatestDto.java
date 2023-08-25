@@ -11,7 +11,7 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LatestDto implements Serializable {
+public class LatestDto {
     @JsonProperty("base_code")
     private String baseCode;
     @JsonProperty("conversion_rates")
