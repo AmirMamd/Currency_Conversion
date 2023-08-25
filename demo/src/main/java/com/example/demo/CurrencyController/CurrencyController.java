@@ -8,7 +8,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -43,6 +46,19 @@ public class CurrencyController{
             return currencyService.getComparisonRates(apiUrl);
         } catch (Exception e) {
             return new LatestDto(); // Handle the error and return an appropriate response
+        }
+    }
+
+    @GetMapping("/compareWithTwo")
+    //@Cacheable("comparison")
+    public @ResponseBody Map<String, String> compareWithBaseAndTwoCurrencies(
+            @RequestParam String base, @RequestParam String countryOne, @RequestParam String countryTwo
+    ) {
+        try {
+            String apiUrl = "https://currencyexchange-wbtr.onrender.com/latest/" + base;
+            return currencyService.getComparisonRatesWithTwoCurrencies(apiUrl,countryOne,countryTwo);
+        } catch (Exception e) {
+            return Collections.emptyMap(); // Handle the error and return an appropriate response
         }
     }
 

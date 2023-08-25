@@ -5,14 +5,14 @@ import com.example.demo.DTOs.ConversionDto;
 import com.example.demo.DTOs.ImageDto;
 import com.example.demo.DTOs.LatestDto;
 import com.example.demo.Enums.Currencies;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -37,6 +37,25 @@ public class CurrencyService {
             return 0.0;
         }
     }
+
+    public Map<String, String> getComparisonRatesWithTwoCurrencies(String apiUrl, String countryOne, String countryTwo) {
+        try {
+            LatestDto latestDto = restTemplate.getForObject(apiUrl, LatestDto.class);
+
+            Map<String, String> conversionRates = latestDto.getConversionRates();
+
+            Map<String, String> selectedRates = new HashMap<>();
+            selectedRates.put(countryOne, conversionRates.get(countryOne));
+            selectedRates.put(countryTwo, conversionRates.get(countryTwo));
+
+            return selectedRates;
+        } catch (Exception e) {
+            logger.error("Error occurred while fetching comparison rates: {}", e.getMessage());
+            return Collections.emptyMap(); // Return an empty map in case of an error
+        }
+    }
+
+
 
     public LatestDto getComparisonRates(String apiUrl) {
         try {

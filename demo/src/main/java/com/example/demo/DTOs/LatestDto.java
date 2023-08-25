@@ -16,4 +16,5 @@ public class LatestDto {
     private String baseCode;
     @JsonProperty("conversion_rates")
     private Map<String, String> conversionRates;
+
 }
