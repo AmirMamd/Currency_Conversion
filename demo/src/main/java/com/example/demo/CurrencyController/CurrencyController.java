@@ -1,5 +1,6 @@
 package com.example.demo.CurrencyController;
 
+import com.example.demo.DTOs.ConversionDto;
 import com.example.demo.DTOs.ImageDto;
 import com.example.demo.DTOs.LatestDto;
 import com.example.demo.Service.CurrencyService;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -25,15 +27,16 @@ public class CurrencyController{
 
     @GetMapping("/convert")
     //@Cacheable("conversion")
-    public Double convertCurrency(
+    public ResponseEntity<ConversionDto> convertCurrency(
             @RequestParam String fromCurrency,
             @RequestParam String toCurrency,
             @RequestParam Double amount) {
         try {
             String apiUrl = "https://currencyexchange-wbtr.onrender.com/pair/"+fromCurrency+"/" + toCurrency + "/" + amount;
-            return currencyService.getConversion(apiUrl);
+            double conversion = currencyService.getConversion(apiUrl);
+            return ResponseEntity.ok(new ConversionDto(conversion));
         } catch (Exception e) {
-            return 0.0;
+            return ResponseEntity.badRequest().build();
         }
     }
     @GetMapping("/compare")
