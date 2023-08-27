@@ -26,12 +26,7 @@ public class CurrencyService {
         try {
             ConversionDto response = restTemplate.getForObject(apiUrl, ConversionDto.class);
             assert response != null;
-            Double responseAmount = Double.parseDouble(response.getAmount());
-            Double conversionRate = Double.parseDouble(response.getConversionRate());
-
-            // Calculate the converted amount
-
-            return responseAmount * conversionRate;
+            return response.getConversionValue();
         }catch(Exception e){
             logger.error("Error occurred while fetching conversion: {}", e.getMessage());
             return 0.0;

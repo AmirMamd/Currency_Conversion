@@ -21,4 +21,9 @@ public class ConversionDto {
 
     @JsonProperty("conversion_rate")
     private String conversionRate;
+
+    @JsonProperty("conversion_value")
+    private double conversionValue;
+
+
 }
