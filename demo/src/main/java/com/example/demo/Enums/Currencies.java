@@ -13,7 +13,8 @@ public enum Currencies {
     KWD("KWD", "https://www.countryflagicons.com/FLAT/64/KW.png"),
     BHD("BHD", "https://www.countryflagicons.com/FLAT/64/BH.png"),
     OMR("OMR", "https://www.countryflagicons.com/FLAT/64/OM.png"),
-    QAR("QAR", "https://www.countryflagicons.com/FLAT/64/QA.png");
+    QAR("QAR", "https://www.countryflagicons.com/FLAT/64/QA.png"),
+    EGP("EGP","https://www.countryflagicons.com/FLAT/64/EG.png");
 
     private final String currency;
     private final String flagUrl;
