@@ -26,7 +26,7 @@ public class CurrencyService {
         try {
             ConversionDto response = restTemplate.getForObject(apiUrl, ConversionDto.class);
             assert response != null;
-            return response.getConversionValue();
+            return response.getConversionResult();
         }catch(Exception e){
             logger.error("Error occurred while fetching conversion: {}", e.getMessage());
             return 0.0;
@@ -49,8 +49,6 @@ public class CurrencyService {
             return Collections.emptyMap(); // Return an empty map in case of an error
         }
     }
-
-
 
     public LatestDto getComparisonRates(String apiUrl) {
         try {

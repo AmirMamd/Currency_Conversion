@@ -1,5 +1,6 @@
 package com.example.demo.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ConversionDto {
 
-    @JsonProperty("conversion_value")
-    private double conversionValue;
+    @JsonProperty("conversion_result")
+    private double conversionResult;
 
 }

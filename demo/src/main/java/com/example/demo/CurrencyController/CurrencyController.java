@@ -32,7 +32,7 @@ public class CurrencyController{
             @RequestParam String toCurrency,
             @RequestParam Double amount) {
         try {
-            String apiUrl = "https://currencyexchange-wbtr.onrender.com/pair/"+fromCurrency+"/" + toCurrency + "/" + amount;
+            String apiUrl = "https://v6.exchangerate-api.com/v6/ecf10bab01b34bf0de9636e1/pair/"+fromCurrency+"/" + toCurrency + "/" + amount;
             double conversion = currencyService.getConversion(apiUrl);
             return ResponseEntity.ok(new ConversionDto(conversion));
         } catch (Exception e) {
@@ -45,20 +45,19 @@ public class CurrencyController{
             @RequestParam String base
     ) {
         try {
-            String apiUrl = "https://currencyexchange-wbtr.onrender.com/latest/" + base;
+            String apiUrl = "https://v6.exchangerate-api.com/v6/ecf10bab01b34bf0de9636e1/latest/" + base;
             return currencyService.getComparisonRates(apiUrl);
         } catch (Exception e) {
             return new LatestDto(); // Handle the error and return an appropriate response
         }
     }
-
     @GetMapping("/compareWithTwo")
     //@Cacheable("comparison")
     public @ResponseBody Map<String, String> compareWithBaseAndTwoCurrencies(
             @RequestParam String base, @RequestParam String countryOne, @RequestParam String countryTwo
     ) {
         try {
-            String apiUrl = "https://currencyexchange-wbtr.onrender.com/latest/" + base;
+            String apiUrl = "https://v6.exchangerate-api.com/v6/ecf10bab01b34bf0de9636e1/latest/" + base;
             return currencyService.getComparisonRatesWithTwoCurrencies(apiUrl,countryOne,countryTwo);
         } catch (Exception e) {
             return Collections.emptyMap(); // Handle the error and return an appropriate response
