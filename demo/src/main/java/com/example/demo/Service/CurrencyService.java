@@ -34,6 +34,7 @@ public class CurrencyService {
         try {
             LatestDto latestDto = restTemplate.getForObject(apiUrl, LatestDto.class);
 
+            assert latestDto != null;
             Map<String, String> conversionRates = latestDto.getConversionRates();
 
             Map<String, String> selectedRates = new HashMap<>();
