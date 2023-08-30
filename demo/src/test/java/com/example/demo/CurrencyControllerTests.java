@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.CurrencyController.CurrencyController;
+import com.example.demo.DTOs.ConversionDto;
 import com.example.demo.DTOs.ImageDto;
 import com.example.demo.DTOs.LatestDto;
 import com.example.demo.Service.CurrencyService;
@@ -31,18 +32,21 @@ public class CurrencyControllerTests {
 
     @Test
     public void testConvertCurrency() throws Exception {
-        double expectedAmount = 50.0;
+        ConversionDto conversionDto= new ConversionDto();
         Mockito.when(currencyService.getConversion(Mockito.anyString()))
-                .thenReturn(expectedAmount);
+                .thenReturn(conversionDto.getConversionResult());
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/currency/convert")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/currency/convert")
                         .param("fromCurrency", "USD")
                         .param("toCurrency", "EUR")
                         .param("amount", "25.0")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").value(expectedAmount));
+                .andReturn();
+        String responseContent = mvcResult.getResponse().getContentAsString();
+        ConversionDto responseDto = new ObjectMapper().readValue(responseContent, ConversionDto.class);
+        assertEquals(conversionDto, responseDto);
     }
 
     @Test

@@ -1,11 +1,8 @@
 package com.example.demo.Service;
-
 import com.example.demo.DTOs.ConversionDto;
-
 import com.example.demo.DTOs.ImageDto;
 import com.example.demo.DTOs.LatestDto;
 import com.example.demo.Enums.Currencies;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
